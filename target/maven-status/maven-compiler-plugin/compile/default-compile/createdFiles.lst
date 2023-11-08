@@ -3,5 +3,7 @@ com\projeto2\model\Estoque.class
 com\projeto2\model\Produto.class
 com\projeto2\view\TelaInicial.class
 com\projeto2\model\Restaurante.class
+com\projeto2\view\TelaInicial$1.class
+com\projeto2\controller\Controlador.class
 com\projeto2\Projeto2$1.class
 com\projeto2\Projeto2.class
