@@ -8,6 +8,7 @@ import java.util.ArrayList;
  * @author Igor J Rodrigues
  */
 public class Pedido {
+    private int numPedido;
     private LocalDate dataPedido;
     private String rua;
     private int numero;
@@ -16,7 +17,8 @@ public class Pedido {
     private ArrayList<Produto> produtos;
     private String pagamento;
 
-    public Pedido(LocalDate dataPedido, String rua, int numero, String bairro, String referencia, ArrayList<Produto> produtos, String pagamento) {
+    public Pedido(int numPedido, LocalDate dataPedido, String rua, int numero, String bairro, String referencia, ArrayList<Produto> produtos, String pagamento) {
+        this.numPedido = numPedido;
         this.dataPedido = dataPedido;
         this.rua = rua;
         this.numero = numero;
@@ -26,7 +28,8 @@ public class Pedido {
         this.pagamento = pagamento;
     }
     
-    public Pedido(LocalDate dataPedido, String rua, int numero, String bairro, String referencia, String pagamento) {
+    public Pedido(int numPedido, LocalDate dataPedido, String rua, int numero, String bairro, String referencia, String pagamento) {
+        this.numPedido = numPedido;
         this.dataPedido = dataPedido;
         this.rua = rua;
         this.numero = numero;
@@ -34,6 +37,14 @@ public class Pedido {
         this.referencia = referencia;
         this.produtos = new ArrayList<>();
         this.pagamento = pagamento;
+    }
+
+    public int getNumPedido() {
+        return numPedido;
+    }
+
+    public void setNumPedido(int numPedido) {
+        this.numPedido = numPedido;
     }
 
     public LocalDate getDataPedido() {

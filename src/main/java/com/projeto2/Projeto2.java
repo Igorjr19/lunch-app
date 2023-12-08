@@ -12,7 +12,8 @@ import javax.swing.UnsupportedLookAndFeelException;
  *
  * @author Igor J Rodrigues
  */
-public class Projeto2 {
+public class Projeto2 
+{
 
     public static void setLookAndFeel() {
         try {
@@ -26,14 +27,10 @@ public class Projeto2 {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         /* Setting Look and Feel */
         setLookAndFeel();
         /* Create and display the form TelaIncial */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new TelaInicial().setVisible(true);
-            }
-        });
+        new TelaInicial().setVisible(true);
     }
 }

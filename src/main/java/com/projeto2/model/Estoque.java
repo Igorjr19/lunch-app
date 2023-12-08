@@ -27,12 +27,19 @@ public class Estoque {
     
     public boolean possui(String nome) {
         for (Produto produto : produtos) {
-            if (produto.getNome().equals(nome)) {
-                if (produto.getQuantidade() > 0) {
+            if (produto.getNome().equals(nome) && produto.getQuantidade() > 0) {
                     return true;
-                }
             }
         }
         return false;
+    }
+    
+    public Produto buscarProduto(String nome) {
+        for (Produto produto : produtos) {
+            if(produto.getNome().equals(nome)){
+                return produto;
+            }
+        }
+        return null;
     }
 }
