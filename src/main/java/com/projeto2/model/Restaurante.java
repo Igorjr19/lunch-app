@@ -1,5 +1,6 @@
 package com.projeto2.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -7,11 +8,17 @@ import java.util.ArrayList;
  *
  * @author Igor J Rodrigues
  */
-public class Restaurante {
+public class Restaurante implements Serializable {
 
     private Estoque estoque;
     private ArrayList<Pedido> pedidos;
     private int numPedidos;
+
+    public Restaurante() {
+        estoque = new Estoque();
+        pedidos = new ArrayList<>();
+        numPedidos = 0;
+    }
 
     public int getNumPedidos() {
         return numPedidos;
@@ -37,19 +44,14 @@ public class Restaurante {
         this.pedidos = pedidos;
     }
 
-    public void novoPedido(int dia, int mes, int ano, String rua, int numero, String bairro, String referencia, ArrayList<String> nomesProdutos, String pagamento) {
-        LocalDate dataPedido = LocalDate.of(ano, mes, dia);
+    public void novoPedido(String rua, int numero, String bairro, String referencia, ArrayList<Produto> produtos, String pagamento) {
+        LocalDate dataPedido = LocalDate.now();
         numPedidos += 1;
         Pedido novoPedido = new Pedido(numPedidos, dataPedido, rua, numero, bairro, referencia, pagamento);
-        ArrayList<Produto> produtosPedido = new ArrayList<>();
-        for (Produto produtoEstoque : estoque.getProdutos()) {
-            for (String produto : nomesProdutos) {
-                if (produto.equals(produtoEstoque.getNome())) {
-                    produtosPedido.add(produtoEstoque);
-                }
-            }
+        novoPedido.setProdutos(produtos);
+        for (Produto produto : produtos) {
+            controlarEstoque(estoque.buscarProduto(produto.getNome()).getNome(), estoque.buscarProduto(produto.getNome()).getQuantidade() - produto.getQuantidade());
         }
-        novoPedido.setProdutos(produtosPedido);
         pedidos.add(novoPedido);
     }
 
@@ -69,18 +71,33 @@ public class Restaurante {
         }
         return nomes;
     }
-    
+
     public void excluirPedido(int num) {
-        int i = 0;
-        for (Pedido pedido : pedidos) {
-            if(pedido.getNumPedido() == num) {
+        for (int i = 0; i < pedidos.size(); i ++) {
+            if (pedidos.get(i).getNumPedido() == num) {
                 pedidos.remove(i);
             }
-            i++;
         }
     }
-    
+
     public int getQuantProduto(String nome) {
         return estoque.buscarProduto(nome).getQuantidade();
+    }
+
+    public String exibirPedidos() {
+        String s = new String();
+        for (Pedido pedido : pedidos) {
+            s += pedido.formatar();
+            s += "\n\n";
+        }
+        return s;
+    }
+    
+    public ArrayList<Integer> getAllNumPedidos() {
+        ArrayList<Integer> pedidosNum = new ArrayList<>();
+        for (Pedido pedido : pedidos) {
+            pedidosNum.add(pedido.getNumPedido());
+        }
+        return pedidosNum;
     }
 }

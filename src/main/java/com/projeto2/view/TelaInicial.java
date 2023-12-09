@@ -16,10 +16,13 @@ public class TelaInicial extends javax.swing.JFrame {
         ImageIcon icon = new ImageIcon("resources/lunch.png");
         this.setIconImage(icon.getImage());
         initComponents();
-        Controlador.inicializar();
+
         jLabelLogo.setText("");
         jLabelLogo.setIcon(icon);
         jLabelLogo.setSize(icon.getIconWidth(), icon.getIconHeight());
+
+        Controlador.inicializar();
+
     }
 
     /**
@@ -34,10 +37,10 @@ public class TelaInicial extends javax.swing.JFrame {
         jLabelLogo = new javax.swing.JLabel();
         jMenuBar = new javax.swing.JMenuBar();
         jMenuVer = new javax.swing.JMenu();
-        jMenuItemVerPedidos = new javax.swing.JMenuItem();
-        jMenuItemEstoque = new javax.swing.JMenuItem();
-        jMenuAdicionar = new javax.swing.JMenu();
         jMenuItemAdicionarPedido = new javax.swing.JMenuItem();
+        jMenuItemVerPedidos = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItemEstoque = new javax.swing.JMenuItem();
         jMenuItemCadastrarProduto = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -50,7 +53,15 @@ public class TelaInicial extends javax.swing.JFrame {
         jLabelLogo.setText("jLabel1");
         jLabelLogo.setEnabled(false);
 
-        jMenuVer.setText("Ver");
+        jMenuVer.setText("Pedidos");
+
+        jMenuItemAdicionarPedido.setText("Cadastrar Pedido");
+        jMenuItemAdicionarPedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemAdicionarPedidoActionPerformed(evt);
+            }
+        });
+        jMenuVer.add(jMenuItemAdicionarPedido);
 
         jMenuItemVerPedidos.setText("Ver Pedidos");
         jMenuItemVerPedidos.addActionListener(new java.awt.event.ActionListener() {
@@ -60,25 +71,17 @@ public class TelaInicial extends javax.swing.JFrame {
         });
         jMenuVer.add(jMenuItemVerPedidos);
 
+        jMenuBar.add(jMenuVer);
+
+        jMenu1.setText("Estoque");
+
         jMenuItemEstoque.setText("Modificar Estoque");
         jMenuItemEstoque.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemEstoqueActionPerformed(evt);
             }
         });
-        jMenuVer.add(jMenuItemEstoque);
-
-        jMenuBar.add(jMenuVer);
-
-        jMenuAdicionar.setText("Adicionar");
-        jMenuAdicionar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuAdicionarActionPerformed(evt);
-            }
-        });
-
-        jMenuItemAdicionarPedido.setText("Adicionar Pedido");
-        jMenuAdicionar.add(jMenuItemAdicionarPedido);
+        jMenu1.add(jMenuItemEstoque);
 
         jMenuItemCadastrarProduto.setText("Cadastrar Produto");
         jMenuItemCadastrarProduto.addActionListener(new java.awt.event.ActionListener() {
@@ -86,9 +89,9 @@ public class TelaInicial extends javax.swing.JFrame {
                 jMenuItemCadastrarProdutoActionPerformed(evt);
             }
         });
-        jMenuAdicionar.add(jMenuItemCadastrarProduto);
+        jMenu1.add(jMenuItemCadastrarProduto);
 
-        jMenuBar.add(jMenuAdicionar);
+        jMenuBar.add(jMenu1);
 
         setJMenuBar(jMenuBar);
 
@@ -112,10 +115,6 @@ public class TelaInicial extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuAdicionarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuAdicionarActionPerformed
-
     private void jMenuItemCadastrarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCadastrarProdutoActionPerformed
         TelaCadastroProduto telaProduto = new TelaCadastroProduto(this, true);
         telaProduto.setLocationRelativeTo(this);
@@ -123,20 +122,26 @@ public class TelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemCadastrarProdutoActionPerformed
 
     private void jMenuItemVerPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemVerPedidosActionPerformed
-       TelaExibirPedidos telaExibirPedidos = new TelaExibirPedidos(this, true);
-       telaExibirPedidos.setLocationRelativeTo(this);
-       telaExibirPedidos.setVisible(true);
+        TelaExibirPedidos telaExibirPedidos = new TelaExibirPedidos(this, true);
+        telaExibirPedidos.setLocationRelativeTo(this);
+        telaExibirPedidos.setVisible(true);
     }//GEN-LAST:event_jMenuItemVerPedidosActionPerformed
 
     private void jMenuItemEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemEstoqueActionPerformed
         TelaEstoque telaEstoque = new TelaEstoque(this, true);
         telaEstoque.setLocationRelativeTo(this);
-        telaEstoque.setVisible(true);     
+        telaEstoque.setVisible(true);
     }//GEN-LAST:event_jMenuItemEstoqueActionPerformed
+
+    private void jMenuItemAdicionarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAdicionarPedidoActionPerformed
+        TelaCadastroPedido telaCadastroPedido = new TelaCadastroPedido(this, true);
+        telaCadastroPedido.setLocationRelativeTo(this);
+        telaCadastroPedido.setVisible(true);
+    }//GEN-LAST:event_jMenuItemAdicionarPedidoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabelLogo;
-    private javax.swing.JMenu jMenuAdicionar;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar;
     private javax.swing.JMenuItem jMenuItemAdicionarPedido;
     private javax.swing.JMenuItem jMenuItemCadastrarProduto;

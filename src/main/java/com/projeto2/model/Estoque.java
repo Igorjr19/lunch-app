@@ -1,12 +1,13 @@
 package com.projeto2.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author Igor J Rodrigues
  */
-public class Estoque {
+public class Estoque implements Serializable {
     private ArrayList<Produto> produtos;
 
     public Estoque() {

@@ -7,42 +7,39 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.ArrayList;
 
 /**
  *
  * @author Igor J Rodrigues
  */
 public class Persistencia {
-    private File estoque;
-    private File pedidos;
+    private File dados;
 
-    public Persistencia(String estoque, String pedidos) {
-        this.estoque = new File(estoque);
-        this.pedidos = new File (pedidos);
+    public Persistencia(String estoque) {
+        this.dados = new File(estoque);
     }
 
-    public void escreverPedidos(ArrayList<Pedido> prods) throws FileNotFoundException, IOException, ClassNotFoundException {
-        FileOutputStream fos = new FileOutputStream(pedidos);
+    public void escreverDados(Restaurante rest) throws FileNotFoundException, IOException, ClassNotFoundException {
+        FileOutputStream fos = new FileOutputStream(dados);
         ObjectOutputStream oos = new ObjectOutputStream(fos);
-        oos.writeObject(prods);
+        oos.writeObject(rest);
         oos.flush();
         oos.close();
     }
-    
-    public ArrayList<Pedido> lerPedidos() throws FileNotFoundException, IOException, ClassNotFoundException {
+
+    public Restaurante lerDados() throws FileNotFoundException, IOException, ClassNotFoundException {
         boolean cont = true;
-        ArrayList<Pedido> ped = new ArrayList();
+        Restaurante rest = new Restaurante();
 
         try {
-            FileInputStream fis = new FileInputStream(pedidos);
+            FileInputStream fis = new FileInputStream(dados);
             ObjectInputStream ois = new ObjectInputStream(fis);
             Object obj = null;
 
             while (cont) {
                 if (fis.available() != 0) {
                     obj = ois.readObject();
-                    ped = ((ArrayList<Pedido>) obj);
+                    rest = ((Restaurante) obj);
                 } else {
                     cont = false;
                 }
@@ -50,38 +47,7 @@ public class Persistencia {
         } catch (Exception e) {
 
         }
-        return ped;
-    }
-
-    public void escreverEstoque(Estoque est) throws FileNotFoundException, IOException, ClassNotFoundException {
-        FileOutputStream fos = new FileOutputStream(estoque);
-        ObjectOutputStream oos = new ObjectOutputStream(fos);
-        oos.writeObject(est);
-        oos.flush();
-        oos.close();
-    }
-
-    public Estoque lerEstoque() throws FileNotFoundException, IOException, ClassNotFoundException {
-        boolean cont = true;
-        Estoque est = new Estoque();
-
-        try {
-            FileInputStream fis = new FileInputStream(estoque);
-            ObjectInputStream ois = new ObjectInputStream(fis);
-            Object obj = null;
-
-            while (cont) {
-                if (fis.available() != 0) {
-                    obj = ois.readObject();
-                    est = ((Estoque) obj);
-                } else {
-                    cont = false;
-                }
-            }
-        } catch (Exception e) {
-
-        }
-        return est;
+        return rest;
     }
 
 }

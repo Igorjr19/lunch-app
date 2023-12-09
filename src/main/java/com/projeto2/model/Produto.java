@@ -1,10 +1,12 @@
 package com.projeto2.model;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Igor J Rodrigues
  */
-public class Produto {
+public class Produto implements Serializable {
     private int quantidade;
     private String nome;
     private double valor;

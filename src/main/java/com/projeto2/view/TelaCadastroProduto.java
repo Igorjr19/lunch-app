@@ -121,6 +121,7 @@ public class TelaCadastroProduto extends javax.swing.JDialog {
         double valor = Double.parseDouble(jFormattedTextFieldValor.getValue().toString());
         int quant = Integer.parseInt(jFormattedTextFieldQuant.getValue().toString());
         Controlador.novoProduto(quant, nome, valor);
+        Controlador.salvar();
         this.dispose();
     }//GEN-LAST:event_jButtonCadastrarActionPerformed
 
